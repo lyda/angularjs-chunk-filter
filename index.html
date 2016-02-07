@@ -1,23 +1,14 @@
 <!DOCTYPE html>
 <html lang="en-US" ng-app="rowApp">
-<head>
-  <meta charset="utf-8"/>
-  <title>Angular chunks</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=no"/>
-
+<head><title>Angular chunks</title>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js" integrity="sha384-c4XWi4+MS7dBmCkPfB02+p/ExOF/ZBOfD2S4KR6mkmpBOg7IM6SUpA1KYZaVr7qE" crossorigin="anonymous"></script>
   <script src="app.js"></script>
-
 </head>
 <body>
-  <div ng-controller="rowController">
-    <table border="1" style="width:30%">
-      <tr ng-repeat="people_chunk in people | chunk:4">
-        <td ng-repeat="person in people_chunk">
-          {{person.name}}
-        </td>
-      </td>
-    </table>
-  </div>
+  <table ng-controller="rowController" border="1" style="width:30%">
+    <tr ng-repeat="people_chunk in people | chunk:4">
+      <td ng-repeat="person in people_chunk">{{person.name}}</td>
+    </td>
+  </table>
 </body>
 </html>
