@@ -2,7 +2,18 @@ var rowApp = angular.module('rowApp', ['filters']);
 
 angular.module('filters', []).
   filter('chunk', function () {
-    return function (items, chunk_size) {
+    function cacheIt(func) {
+      cache = {};
+      return function(arg) {
+        // if the function has been called with the argument short
+        // circuit and use cached value, otherwise call the cached
+        // function with the argument and save it to the cache as
+        // well then return
+        return cache[arg] ? cache[arg] : cache[arg] = func(arg);
+      };
+    }
+
+    function chunk(items, chunk_size) {
       var chunks = [];
       if (angular.isArray(items)) {
         if (isNaN(chunk_size))
@@ -14,7 +25,9 @@ angular.module('filters', []).
         console.log("items is not an array: " + angular.toJson(items));
       }
       return chunks;
-    };
+    }
+    
+    return cacheIt(chunk);
 });
 
 rowApp.controller('rowController',
